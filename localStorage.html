@@ -7,9 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
   <title>투두리스트-로컬스토리지</title>
   <style>
-    body{
-      font-family: 'Gugi', cursive;
-    }
     .container{
       border: 1px solid rgb(182, 230, 245);
       text-align: center;
@@ -28,6 +25,7 @@
       margin-top: 30px;
       font-size: 14px;
       font-weight: normal;
+      font-family: 'Gugi', cursive;
     }
     input {
       width: 300px;
@@ -38,11 +36,11 @@
     button {
       border: none;
       border-radius: 50% 30% 70% 60%;
-      width: 50px;
+      width: 60px;
       height: 30px;
       outline: none;
       margin-left: 10px;
-      font-size: 14px;
+      font-size: 10px;
       font-family: 'Gugi', cursive;
     }
     button:hover{
@@ -109,6 +107,8 @@
     };
   };
   landing();
+
+
   
   clearbtn.addEventListener("click", ()=>{
     localStorage.clear();
