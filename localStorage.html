@@ -3,30 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
   <title>투두리스트-로컬스토리지</title>
   <style>
+    body{
+      font-family: 'Gugi', cursive;
+    }
     .container{
-      border: 1px solid red;
+      border: 1px solid rgb(182, 230, 245);
       text-align: center;
     }
     .content{
-      border: 1px solid blue;
-      background: #e13245;
+      display: inline-block;
+      width: 80%;
+      background-image: url('./autumn-5704791_1280.jpg');
+      background-position: center;
+      background-color: #d0bfff;
+      background-blend-mode: luminosity;
     }
     h1{
       color: #eee;
       text-align: center;
+      margin-top: 30px;
+      font-size: 14px;
+      font-weight: normal;
     }
     input {
       width: 300px;
       border: none;
+      height: 30px;
+      outline: none;
     }
     button {
       border: none;
-      border-radius: 50%;
+      border-radius: 50% 30% 70% 60%;
+      width: 50px;
+      height: 30px;
+      outline: none;
+      margin-left: 10px;
+      font-size: 14px;
+      font-family: 'Gugi', cursive;
+    }
+    button:hover{
+      cursor: pointer;
+      background:rgb(182, 230, 245)
     }
     .list{
-      color: #b9b6df;
+      color: #ffffff;
+      padding: 30px 0;
+    }
+    li{
+      margin-bottom: 10px;
+      list-style: none;
+      font-size: 16px;
     }
   </style>
 </head>
@@ -35,33 +65,60 @@
     <div class="content">
       <h1>오늘의 할일</h1>
       <input type="text" placeholder="입력해주세요" />
-      <button id="add">+</button>
-      <div class="list">
-      </div>  
+      <button id="add">추가</button>
+      <button id="clear">비우기</button>
+      <ul class="list">
+      </ul>  
     </div>
   </div>
 </body>
 <script>
-  const add = document.querySelector("#add"); 
+  const addbtn = document.querySelector("#add"); 
+  const clearbtn = document.querySelector("#clear");
   let i = localStorage.length;
-  console.log(i);
-  add.addEventListener("click", ()=>{
+  // console.log(i);
+  addbtn.addEventListener("click", ()=>{
     const input = document.querySelector("input");
     const value = input.value;
     localStorage.setItem(i, value);
     i++;
     location.reload();
   });
+  clearbtn.addEventListener("click", ()=>{
+    localStorage.clear();
+    location.reload();
+  })
+
   const landing = ()=>{
-    const list = document.querySelector(".list");
-    for(k=0; k<=localStorage.length; k++){
-      const ptag = document.createElement("p")
-      const p = list.appendChild(ptag);
-      const txt = localStorage.getItem(k);
-      p.innerText=txt;
-      p
+    const ul = document.querySelector(".list");
+    for(k=1; k<=localStorage.length; k++){
+      const li = document.createElement("li")
+      const item = ul.appendChild(li);
+      const txt = localStorage.getItem(k-1);
+      const btn = document.createElement("button");
+      btn.setAttribute('id', 'btn '+k);
+      btn.setAttribute('class', 'complete');
+      btn.innerText="완료";
+      li.innerText=txt;
+      li.insertBefore(btn, null);
     };
   };
   landing();
+
+  const completebtn = document.querySelectorAll(".complete");
+  console.log(completebtn);
+  completebtn.forEach(item=>{
+    item.addEventListener("click", ()=>{
+    const id = item.getAttribute("id");
+    const splitid = id.split(" ");
+    
+    // console.log(slpitid);
+    // console.log(slpitid[1]);
+    const key = splitid[1]-1;
+    console.log(key);
+    localStorage.removeItem(key);
+    location.reload();
+  });
+});
   </script>
 </html>
