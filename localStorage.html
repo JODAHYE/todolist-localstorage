@@ -7,16 +7,10 @@
   <style>
     .container{
       border: 1px solid red;
-      height: 100vh;
-      position: relative;
+      text-align: center;
     }
     .content{
-      height: 50%;
       border: 1px solid blue;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       background: #e13245;
     }
     h1{
@@ -48,25 +42,26 @@
   </div>
 </body>
 <script>
-  window.addEventListener("load", function(){
-    localStorage.clear();
-  })
-  const add = document.querySelector("#add");
-  let i = 0;
-  add.addEventListener("click", function(){
-    // console.log("click");
+  const add = document.querySelector("#add"); 
+  let i = localStorage.length;
+  console.log(i);
+  add.addEventListener("click", ()=>{
     const input = document.querySelector("input");
-    // console.log(input);
     const value = input.value;
-    // console.log(value);
-    const list = document.querySelector(".list");
     localStorage.setItem(i, value);
-    const text = localStorage.getItem(i);
-    // console.log(text);
-    const newNode = document.createElement("p");
-    const p = list.appendChild(newNode);
-    p.innerText = text;
     i++;
-  })
-</script>
+    location.reload();
+  });
+  const landing = ()=>{
+    const list = document.querySelector(".list");
+    for(k=0; k<=localStorage.length; k++){
+      const ptag = document.createElement("p")
+      const p = list.appendChild(ptag);
+      const txt = localStorage.getItem(k);
+      p.innerText=txt;
+      p
+    };
+  };
+  landing();
+  </script>
 </html>
