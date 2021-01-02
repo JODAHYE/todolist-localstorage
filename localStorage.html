@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>투두리스트-로컬스토리지</title>
+  <style>
+    .container{
+      border: 1px solid red;
+      height: 100vh;
+      position: relative;
+    }
+    .content{
+      height: 50%;
+      border: 1px solid blue;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #e13245;
+    }
+    h1{
+      color: #eee;
+      text-align: center;
+    }
+    input {
+      width: 300px;
+      border: none;
+    }
+    button {
+      border: none;
+      border-radius: 50%;
+    }
+    .list{
+      color: #b9b6df;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="content">
+      <h1>오늘의 할일</h1>
+      <input type="text" placeholder="입력해주세요" />
+      <button id="add">+</button>
+      <div class="list">
+      </div>  
+    </div>
+  </div>
+</body>
+<script>
+  window.addEventListener("load", function(){
+    localStorage.clear();
+  })
+  const add = document.querySelector("#add");
+  let i = 0;
+  add.addEventListener("click", function(){
+    // console.log("click");
+    const input = document.querySelector("input");
+    // console.log(input);
+    const value = input.value;
+    // console.log(value);
+    const list = document.querySelector(".list");
+    localStorage.setItem(i, value);
+    const text = localStorage.getItem(i);
+    // console.log(text);
+    const newNode = document.createElement("p");
+    const p = list.appendChild(newNode);
+    p.innerText = text;
+    i++;
+  })
+</script>
+</html>
